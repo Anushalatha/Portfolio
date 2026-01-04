@@ -74,6 +74,12 @@ export const resumeData: ResumeData = {
   about: "I'm Anusha B, a passionate AI & Data Science undergraduate dedicated to building impactful tech products. With hands-on experience in ML, full-stack web development, and data-driven research, I enjoy transforming real-world problems into smart AI-powered solutions. From AR-based donation platforms to health assistants, my work blends innovation with purpose.",
   experiences: [
     {
+      company: "Shooting Stars Foundation",
+      position: "IBM Datathon Student Leader",
+      duration: "Aug 2025 – Oct 2025",
+      description: "Managed team assignments and participant registration across colleges. Cleaned and standardized spreadsheet data. Developed quizzes and content for STEM engagement."
+    },
+    {
       company: "Vulture Lines Pvt Ltd",
       position: "Data Analyst Intern",
       duration: "Feb–Mar 2025",
@@ -137,6 +143,30 @@ export const resumeData: ResumeData = {
     }
   ],
   projects: [
+    {
+      title: "SHEconomy",
+      description: "An AI‑powered women‑centric platform with multi‑agent architecture for budgeting, investment, health, jobs, and scheme scanning, delivering transparent recommendations and actionable dashboards.",
+      tags: ["All Projects", "AI & ML", "Website"],
+      techStack: ["React.js", "TypeScript", "Node.js", "OpenAI", "Supabase"],
+      githubUrl: "https://github.com/Anushalatha/SHEconomy.git",
+      category: "AI & ML"
+    },
+    {
+      title: "SeaSync",
+      description: "An AI‑powered marine conservation platform with species recognition, rescue coordination, and real‑time distress tracking, featuring interactive dashboards and integrations for weather, mapping, and image data.",
+      tags: ["All Projects", "AI & ML", "Website"],
+      techStack: ["React.js", "TypeScript", "Node.js", "Express.js", "MongoDB", "Docker"],
+      githubUrl: "https://github.com/Anushalatha/SeaSync.git",
+      category: "AI & ML"
+    },
+    {
+      title: "AgroMind",
+      description: "An AI‑powered agriculture platform for plant disease detection, crop recommendation, irrigation planning, and fertilizer guidance, enhanced with real‑time weather data. Features a responsive dashboard with analytics and an AI chatbot to deliver actionable farming insights.",
+      tags: ["All Projects", "AI & ML", "Website"],
+      techStack: ["React.js", "TypeScript", "Node.js", "Scikit-learn", "OpenCV", "FastAPI", "Supabase"],
+      githubUrl: "https://github.com/Anushalatha/AgroMind-AI.git",
+      category: "AI & ML"
+    },
     {
       title: "EduConnect",
       description: "A collaborative learning and tutoring platform connecting students and educators, featuring AI-powered study tools, real-time sessions, and gamified progress tracking.",
@@ -232,6 +262,11 @@ export const resumeData: ResumeData = {
     }
   ],
   achievements: [
+    {
+      title: "Winners – All India Women's Only Hackathon",
+      description: "Secured top 5 position among 700+ teams for developing an AI-powered financial empowerment platform for underserved women. Cash prize of ₹12,500.",
+      date: "2025"
+    },
     {
       title: "1st Prize at Codeathon 3.0",
       description: "Won first place with ₹10,000 prize for innovative AI solution.",

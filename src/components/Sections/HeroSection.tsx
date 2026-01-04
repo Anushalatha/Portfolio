@@ -20,6 +20,26 @@ const HeroSection: React.FC = () => {
     document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const handleDownloadResume = async (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    try {
+      const response = await fetch('/Anusha%20B%20DMICE%20Resume.pdf');
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'Anusha B DMICE Resume.pdf';
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+    } catch (error) {
+      console.error('Error downloading resume:', error);
+      // Fallback to direct link
+      window.open('/Anusha%20B%20DMICE%20Resume.pdf', '_blank');
+    }
+  };
+
   return (
     <section id="hero" className="min-h-screen flex items-center justify-center relative bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 overflow-hidden">
       <div className="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none"></div>
@@ -50,15 +70,10 @@ const HeroSection: React.FC = () => {
           </button>
 
           <a 
-            href="/Anusha B DMICE Resume.pdf"
+            href="/Anusha%20B%20DMICE%20Resume.pdf"
             download="Anusha B DMICE Resume.pdf"
+            onClick={handleDownloadResume}
             className="px-8 py-4 bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition-transform duration-200 hover:scale-105 hover:shadow-lg font-medium text-lg border border-gray-300 dark:border-gray-600"
-            onClick={(e) => {
-              // Fallback: open in new tab if download fails
-              setTimeout(() => {
-                window.open('/Anusha B DMICE Resume.pdf', '_blank');
-              }, 100);
-            }}
           >
             Download Resume
           </a>
