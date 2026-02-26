@@ -22,13 +22,16 @@ const HeroSection: React.FC = () => {
 
   const handleDownloadResume = async (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
+    const encodedUrl = encodeURI(resumeData.resumeUrl);
     try {
-      const response = await fetch('/Anusha%20B%20DMICE%20Resume.pdf');
+      const response = await fetch(encodedUrl);
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = 'Anusha B DMICE Resume.pdf';
+      // derive filename from resumeUrl
+      const filename = resumeData.resumeUrl.split('/').pop() || 'resume.pdf';
+      a.download = filename;
       document.body.appendChild(a);
       a.click();
       window.URL.revokeObjectURL(url);
@@ -36,7 +39,7 @@ const HeroSection: React.FC = () => {
     } catch (error) {
       console.error('Error downloading resume:', error);
       // Fallback to direct link
-      window.open('/Anusha%20B%20DMICE%20Resume.pdf', '_blank');
+      window.open(encodedUrl, '_blank');
     }
   };
 
@@ -70,8 +73,8 @@ const HeroSection: React.FC = () => {
           </button>
 
           <a 
-            href="/Anusha%20B%20DMICE%20Resume.pdf"
-            download="Anusha B DMICE Resume.pdf"
+            href={encodeURI(resumeData.resumeUrl)}
+            download={resumeData.resumeUrl.split('/').pop() || ''}
             onClick={handleDownloadResume}
             className="px-8 py-4 bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition-transform duration-200 hover:scale-105 hover:shadow-lg font-medium text-lg border border-gray-300 dark:border-gray-600"
           >

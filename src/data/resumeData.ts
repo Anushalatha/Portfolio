@@ -5,6 +5,7 @@ export interface ResumeData {
   title: string;
   location: string;
   email: string;
+  resumeUrl: string;
   socialLinks: {
     icon: typeof Github | typeof Linkedin | typeof Mail;
     url: string;
@@ -54,6 +55,7 @@ export const resumeData: ResumeData = {
   title: "AI & Full-Stack Developer",
   location: "Chennai, Tamil Nadu, India",
   email: "anushalathaaa7@gmail.com",
+  resumeUrl: "/Anusha B 2026 Resume.pdf",
   socialLinks: [
     {
       icon: Github,
@@ -74,10 +76,22 @@ export const resumeData: ResumeData = {
   about: "I'm Anusha B, a passionate AI & Data Science undergraduate dedicated to building impactful tech products. With hands-on experience in ML, full-stack web development, and data-driven research, I enjoy transforming real-world problems into smart AI-powered solutions. From AR-based donation platforms to health assistants, my work blends innovation with purpose.",
   experiences: [
     {
+      company: "Point Pikkers",
+      position: "Full Stack Developer",
+      duration: "Jan 2026 – Present",
+      description: "Developing scalable web applications using React, TypeScript, and Node.js. Developed secure REST APIs and optimized backend performance."
+    },
+    {
       company: "Shooting Stars Foundation",
-      position: "IBM Datathon Student Leader",
+      position: "IBM Datathon Analyst",
       duration: "Aug 2025 – Oct 2025",
       description: "Managed team assignments and participant registration across colleges. Cleaned and standardized spreadsheet data. Developed quizzes and content for STEM engagement."
+    },
+    {
+      company: "OneYes Infotech Solutions",
+      position: "AI / ML Developer Intern",
+      duration: "May 2025 – Aug 2025",
+      description: "Built and deployed ML models using FastAPI. Performed feature engineering and model evaluation. Integrated AI capabilities into production systems."
     },
     {
       company: "Vulture Lines Pvt Ltd",
@@ -90,12 +104,6 @@ export const resumeData: ResumeData = {
       position: "Machine Learning Intern",
       duration: "Feb–Mar 2024",
       description: "Developed ML models and conducted data analysis for predictive systems."
-    },
-    {
-      company: "DLK Technologies",
-      position: "AI Intern",
-      duration: "Sep 2023",
-      description: "Assisted in implementing AI algorithms and solutions for client projects."
     }
   ],
   education: [
@@ -103,7 +111,7 @@ export const resumeData: ResumeData = {
       institution: "DMI College of Engineering",
       degree: "B.Tech in Artificial Intelligence & Data Science",
       duration: "2022–2026",
-      description: "Currently pursuing with focus on machine learning and data engineering."
+      description: "Currently pursuing with focus on machine learning and data engineering. Current CGPA: 8.77/10"
     },
     {
       institution: "Sunshine Academy",
