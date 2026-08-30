@@ -1,97 +1,100 @@
-import React, { useEffect, useRef } from 'react';
-import { ChevronDown } from 'lucide-react';
+import React from 'react';
 import { resumeData } from '../../data/resumeData';
 
 const HeroSection: React.FC = () => {
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  
-  useEffect(() => {
-    const titleElement = titleRef.current;
-    if (!titleElement) return;
-    
-    titleElement.classList.add('animate-in');
-  }, []);
-
-  const handleScrollDown = () => {
-    document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  const handleContactClick = () => {
-    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  const handleDownloadResume = async (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    const encodedUrl = encodeURI(resumeData.resumeUrl);
-    try {
-      const response = await fetch(encodedUrl);
-      const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      // derive filename from resumeUrl
-      const filename = resumeData.resumeUrl.split('/').pop() || 'resume.pdf';
-      a.download = filename;
-      document.body.appendChild(a);
-      a.click();
-      window.URL.revokeObjectURL(url);
-      document.body.removeChild(a);
-    } catch (error) {
-      console.error('Error downloading resume:', error);
-      // Fallback to direct link
-      window.open(encodedUrl, '_blank');
+  const handleScrollToProjects = () => {
+    const element = document.getElementById('projects');
+    if (element) {
+      const offset = 80;
+      const bodyRect = document.body.getBoundingClientRect().top;
+      const elementRect = element.getBoundingClientRect().top;
+      const elementPosition = elementRect - bodyRect;
+      const offsetPosition = elementPosition - offset;
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
     }
   };
 
+  const getGithubLink = () => {
+    const githubLink = resumeData.socialLinks.find(link => link.label.toLowerCase() === 'github');
+    return githubLink ? githubLink.url : 'https://github.com/Anushalatha';
+  };
+
   return (
-    <section id="hero" className="min-h-screen flex items-center justify-center relative bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 overflow-hidden">
-      <div className="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none"></div>
+    <section 
+      id="hero" 
+      className="min-h-[90vh] flex items-center justify-center relative bg-[#030014] pt-20 overflow-hidden"
+    >
+      {/* Space glow flares */}
+      <div className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-[#7042f8]/10 blur-[130px] pointer-events-none"></div>
+      <div className="absolute bottom-[10%] right-[-10%] w-[45vw] h-[45vw] rounded-full bg-[#030014]/10 bg-gradient-to-l from-cyan-500/5 to-purple-500/5 blur-[120px] pointer-events-none"></div>
+
+      {/* Editorial grid lines background overlay */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-40 pointer-events-none"></div>
       
-      <div className="container mx-auto px-4 md:px-6 py-20 flex flex-col items-center text-center z-10">
-        <p className="text-blue-600 dark:text-blue-400 font-medium mb-4 tracking-wide animate-fadeIn">
-          Hello, I'm
+      {/* Decorative vertical border lines to feel architectural / technical */}
+      <div className="absolute left-[8%] top-0 bottom-0 w-[1px] bg-[#2A0E61]/40 hidden lg:block opacity-60"></div>
+      <div className="absolute right-[8%] top-0 bottom-0 w-[1px] bg-[#2A0E61]/40 hidden lg:block opacity-60"></div>
+
+      <div className="container mx-auto px-6 md:px-16 py-20 flex flex-col items-center text-center z-10 max-w-4xl relative">
+        {/* Soft engineering label */}
+        <p className="font-display text-[10px] tracking-[0.25em] text-purple-400 uppercase font-semibold mb-6 animate-fadeIn">
+          PORTFOLIO ARCHIVE / 2026
         </p>
         
+        {/* Editorial Heading */}
         <h1 
-          ref={titleRef}
-          className="text-4xl md:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white mb-6 opacity-0 transition-opacity duration-1000"
-          style={{ animationDelay: '0.2s' }}
+          className="font-display text-4xl sm:text-6xl md:text-7xl font-bold text-white tracking-tight leading-[1.05] mb-8 animate-fadeIn"
+          style={{ animationDelay: '0.1s' }}
         >
-          {resumeData.name}
+          AI/ML ENGINEER <br />
+          <span className="bg-gradient-to-r from-purple-500 via-indigo-500 to-cyan-500 bg-clip-text text-transparent">&amp;</span> FULL-STACK DEV
         </h1>
         
-        <h2 className="text-xl md:text-2xl lg:text-3xl text-gray-700 dark:text-gray-300 mb-8 max-w-3xl animate-fadeIn" style={{ animationDelay: '0.4s' }}>
-          <span className="text-blue-600 dark:text-blue-400 font-semibold">{resumeData.title}</span> passionate about creating innovative solutions with AI and cutting-edge technologies
-        </h2>
+        {/* Supporting Copy */}
+        <p 
+          className="text-base sm:text-lg text-slate-400 font-light leading-relaxed max-w-2xl mb-12 animate-fadeIn"
+          style={{ animationDelay: '0.2s' }}
+        >
+          I build intelligent systems and full-stack applications that combine machine learning, software engineering, and practical product thinking.
+        </p>
         
-        <div className="flex flex-col sm:flex-row gap-4 animate-fadeIn" style={{ animationDelay: '0.6s' }}>
+        {/* CTAs */}
+        <div 
+          className="flex flex-col sm:flex-row gap-4 justify-center items-center w-full sm:w-auto animate-fadeIn"
+          style={{ animationDelay: '0.3s' }}
+        >
           <button
-            onClick={handleContactClick}
-            className="px-8 py-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-transform duration-200 hover:scale-105 hover:shadow-lg font-medium text-lg"
+            onClick={handleScrollToProjects}
+            className="w-full sm:w-auto font-display text-xs font-semibold tracking-widest text-white bg-[#7042f88b]/20 hover:bg-[#7042f88b]/40 transition-all duration-300 py-4 px-8 border border-[#7042f861] rounded-full shadow-[0_0_15px_rgba(112,66,248,0.2)] backdrop-blur-sm"
           >
-            Contact Me
+            VIEW SELECTED WORK
           </button>
 
           <a 
-            href={encodeURI(resumeData.resumeUrl)}
-            download={resumeData.resumeUrl.split('/').pop() || ''}
-            onClick={handleDownloadResume}
-            className="px-8 py-4 bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition-transform duration-200 hover:scale-105 hover:shadow-lg font-medium text-lg border border-gray-300 dark:border-gray-600"
+            href={getGithubLink()}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full sm:w-auto text-center font-display text-xs font-semibold tracking-widest text-[#B4B6C3] hover:text-white border border-[#2A0E61] hover:border-[#7042f88b] transition-all duration-300 py-4 px-8 bg-[#0300145e]/50 rounded-full"
           >
-            Download Resume
+            GITHUB
           </a>
-        </div>
-        
-        <div 
-          className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce cursor-pointer z-20"
-          onClick={handleScrollDown}
-        >
-          <svg className="w-10 h-10 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" /></svg>
+
+          <a 
+            href={resumeData.resumeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full sm:w-auto text-center font-display text-xs font-semibold tracking-widest text-[#B4B6C3] hover:text-white border border-[#2A0E61] hover:border-[#7042f88b] transition-all duration-300 py-4 px-8 bg-[#0300145e]/50 rounded-full"
+          >
+            RESUME
+          </a>
         </div>
       </div>
       
-      {/* Decorative Elements */}
-      <div className="absolute -bottom-5 left-0 w-full h-20 bg-white dark:bg-gray-900 skew-y-3 transform origin-bottom-right"></div>
+      {/* Thin line separating hero from content */}
+      <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-[#2A0E61]/40"></div>
     </section>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import Header from './components/Layout/Header';
 import Footer from './components/Layout/Footer';
 import HeroSection from './components/Sections/HeroSection';
@@ -6,46 +6,30 @@ import AboutSection from './components/Sections/AboutSection';
 import ExperienceSection from './components/Sections/ExperienceSection';
 import SkillsSection from './components/Sections/SkillsSection';
 import ProjectsSection from './components/Sections/ProjectsSection';
-import AchievementsSection from './components/Sections/AchievementsSection';
+import ResearchSection from './components/Sections/ResearchSection';
 import ContactSection from './components/Sections/ContactSection';
 import './index.css';
 
 function App() {
-  const [isDarkMode, setIsDarkMode] = useState(() => {
-    const savedMode = localStorage.getItem('darkMode');
-    return savedMode ? JSON.parse(savedMode) : window.matchMedia('(prefers-color-scheme: dark)').matches;
-  });
-
   useEffect(() => {
     // Update the document title
-    document.title = "Anusha B | AI & Full-Stack Developer";
+    document.title = "Anusha B | AI/ML Engineer & Full-Stack Developer";
     
-    // Apply dark mode class to html element
-    if (isDarkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-    
-    // Save preference to localStorage
-    localStorage.setItem('darkMode', JSON.stringify(isDarkMode));
-  }, [isDarkMode]);
-
-  const toggleDarkMode = () => {
-    setIsDarkMode((prevMode) => !prevMode);
-  };
+    // Remove dark mode lock
+    document.documentElement.classList.remove('dark');
+  }, []);
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-300">
-      <Header isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
+    <div className="min-h-screen bg-[#090A0F] text-[#F3F4F6] transition-colors duration-300">
+      <Header isDarkMode={true} toggleDarkMode={() => {}} />
       
       <main>
         <HeroSection />
         <AboutSection />
-        <ExperienceSection />
         <SkillsSection />
         <ProjectsSection />
-        <AchievementsSection />
+        <ExperienceSection />
+        <ResearchSection />
         <ContactSection />
       </main>
       

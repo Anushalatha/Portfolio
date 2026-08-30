@@ -1,5 +1,37 @@
 import { Github, Linkedin, Mail } from 'lucide-react';
 
+export interface Project {
+  title: string;
+  description: string;
+  tags: string[];
+  techStack: string[];
+  demoUrl?: string;
+  githubUrl: string;
+  category: string;
+  isFlagship?: boolean;
+}
+
+export interface Experience {
+  company: string;
+  position: string;
+  duration: string;
+  bullets: string[];
+}
+
+export interface Education {
+  institution: string;
+  degree: string;
+  duration: string;
+  description: string;
+}
+
+export interface Publication {
+  title: string;
+  journal?: string;
+  year?: string;
+  url?: string;
+}
+
 export interface ResumeData {
   name: string;
   title: string;
@@ -12,31 +44,14 @@ export interface ResumeData {
     label: string;
   }[];
   about: string;
-  experiences: {
-    company: string;
-    position: string;
-    duration: string;
-    description: string;
-  }[];
-  education: {
-    institution: string;
-    degree: string;
-    duration: string;
-    description: string;
-  }[];
+  experiences: Experience[];
+  education: Education[];
   skills: {
     category: string;
     items: string[];
   }[];
-  projects: {
-    title: string;
-    description: string;
-    tags: string[];
-    techStack: string[];
-    demoUrl?: string;
-    githubUrl: string;
-    category: string;
-  }[];
+  projects: Project[];
+  publications: Publication[];
   achievements: {
     title: string;
     description: string;
@@ -52,10 +67,10 @@ export interface ResumeData {
 
 export const resumeData: ResumeData = {
   name: "Anusha B",
-  title: "AI & Full-Stack Developer",
+  title: "AI/ML Engineer & Full-Stack Developer",
   location: "Chennai, Tamil Nadu, India",
   email: "anushalathaaa7@gmail.com",
-  resumeUrl: "/Anusha B 2026 Resume.pdf",
+  resumeUrl: "/Anusha B Resume.pdf",
   socialLinks: [
     {
       icon: Github,
@@ -73,226 +88,152 @@ export const resumeData: ResumeData = {
       label: "Email"
     }
   ],
-  about: "I'm Anusha B, a passionate AI & Data Science undergraduate dedicated to building impactful tech products. With hands-on experience in ML, full-stack web development, and data-driven research, I enjoy transforming real-world problems into smart AI-powered solutions. From AR-based donation platforms to health assistants, my work blends innovation with purpose.",
+  about: "I build intelligent systems and full-stack applications that combine machine learning, software engineering, and practical product thinking. Specializing in computer vision, deep learning pipelines, and robust backend engineering, I focus on solving complex computational problems and designing scalable products that deliver real user impact.",
   experiences: [
     {
       company: "Point Pikkers",
-      position: "Full Stack Developer",
-      duration: "Jan 2026 – Present",
-      description: "Developing scalable web applications using React, TypeScript, and Node.js. Developed secure REST APIs and optimized backend performance."
+      position: "Full-Stack Developer",
+      duration: "Jan 2026 – May 2026",
+      bullets: [
+        "Engineered scalable web applications by leveraging React, TypeScript, and Node.js REST services.",
+        "Designed, integrated, and optimized backend databases, boosting data retrieval performance.",
+        "Created secure API endpoints and authentication protocols, safeguarding application services."
+      ]
     },
     {
       company: "Shooting Stars Foundation",
       position: "IBM Datathon Analyst",
       duration: "Aug 2025 – Oct 2025",
-      description: "Managed team assignments and participant registration across colleges. Cleaned and standardized spreadsheet data. Developed quizzes and content for STEM engagement."
+      bullets: [
+        "Coordinated cross-college operations and registrations, structuring structured spreadsheets to log analytical data.",
+        "Processed and engineered cleaning pipelines for large datasets to ensure data integrity and validation accuracy.",
+        "Developed custom technical challenges and evaluations for STEM talent engagement."
+      ]
     },
     {
       company: "OneYes Infotech Solutions",
       position: "AI / ML Developer Intern",
       duration: "May 2025 – Aug 2025",
-      description: "Built and deployed ML models using FastAPI. Performed feature engineering and model evaluation. Integrated AI capabilities into production systems."
+      bullets: [
+        "Built predictive machine learning models and deployed them as API services utilizing FastAPI.",
+        "Completed rigorous exploratory data analysis, feature engineering, and validation routines.",
+        "Integrated computer vision and LLM endpoints into active client-facing frontend infrastructures."
+      ]
     },
     {
       company: "Vulture Lines Pvt Ltd",
       position: "Data Analyst Intern",
-      duration: "Feb–Mar 2025",
-      description: "Analyzed data patterns and created visualization dashboards to support business decisions."
+      duration: "Feb – Mar 2025",
+      bullets: [
+        "Analyzed operational datasets to detect behavior anomalies and built interactive PowerBI dashboards for insights.",
+        "Aggregated heterogenous telemetry records and synthesized visual reports for core business stakeholders."
+      ]
     },
     {
       company: "Prodigy Infotech",
       position: "Machine Learning Intern",
-      duration: "Feb–Mar 2024",
-      description: "Developed ML models and conducted data analysis for predictive systems."
+      duration: "Feb – Mar 2024",
+      bullets: [
+        "Programmed classification and regression ML models, designing custom normalization pipelines.",
+        "Conducted hyperparameter tuning on deep networks (CNNs, LSTMs) to optimize inference metrics."
+      ]
     }
   ],
   education: [
     {
       institution: "DMI College of Engineering",
       degree: "B.Tech in Artificial Intelligence & Data Science",
-      duration: "2022–2026",
-      description: "Currently pursuing with focus on machine learning and data engineering. Current CGPA: 8.77/10"
-    },
-    {
-      institution: "Sunshine Academy",
-      degree: "Higher Secondary School",
-      duration: "2021–2022",
-      description: "Completed with 78% aggregate score."
+      duration: "2022 – 2026",
+      description: "Focus on machine learning, deep learning, big data analysis, and software engineering. Current CGPA: 8.77/10."
     }
   ],
   skills: [
     {
-      category: "Languages & Frameworks",
-      items: ["Python", "C", "C++", "React.js", "TypeScript", "Tailwind CSS"]
+      category: "AI / MACHINE LEARNING",
+      items: ["TensorFlow", "PyTorch", "Keras", "Scikit-learn", "XGBoost", "LightGBM", "CNN", "RNN", "LSTM", "LLMs", "FastAPI"]
     },
     {
-      category: "Frontend Development",
-      items: ["React.js", "TypeScript", "Tailwind CSS"]
+      category: "FULL-STACK DEVELOPMENT",
+      items: ["React.js", "TypeScript", "Tailwind CSS", "Node.js", "Express.js", "Flask", "HTML5", "CSS3", "JavaScript"]
     },
     {
-      category: "Backend Development",
-      items: ["Node.js", "Express.js", "FastAPI", "Flask", "REST APIs"]
+      category: "DATA & ANALYTICS",
+      items: ["PowerBI", "Plotly", "Dash", "Matplotlib", "Seaborn", "Streamlit", "SQL", "MongoDB", "Supabase"]
     },
     {
-      category: "Machine Learning & Deep Learning",
-      items: ["TensorFlow", "PyTorch", "Keras", "Scikit-learn", "XGBoost", "LightGBM", "CNN", "RNN", "LSTM"]
-    },
-    {
-      category: "Data Visualization & Analytics",
-      items: ["PowerBI", "Plotly", "Dash", "Matplotlib", "Seaborn", "Streamlit"]
-    },
-    {
-      category: "Cloud & Security",
-      items: ["GCP", "Azure", "Blockchain", "Ethereum"]
-    },
-    {
-      category: "Model Deployment",
-      items: ["TensorFlow Serving", "Docker", "Vercel"]
+      category: "TOOLS & PLATFORMS",
+      items: ["Git", "Docker", "GCP", "Azure", "Blockchain", "Vercel", "Vite", "Linux"]
     }
   ],
   projects: [
     {
-      title: "SHEconomy",
-      description: "An AI‑powered women‑centric platform with multi‑agent architecture for budgeting, investment, health, jobs, and scheme scanning, delivering transparent recommendations and actionable dashboards.",
+      title: "DressFit",
+      description: "My final year project. An AI-powered fashion intelligence platform for virtual outfits and size tailoring. Built under-the-hood machine learning models to analyze styling dimensions and visual fittings.",
       tags: ["All Projects", "AI & ML", "Website"],
-      techStack: ["React.js", "TypeScript", "Node.js", "OpenAI", "Supabase"],
-      githubUrl: "https://github.com/Anushalatha/SHEconomy.git",
-      category: "AI & ML"
-    },
-    {
-      title: "SeaSync",
-      description: "An AI‑powered marine conservation platform with species recognition, rescue coordination, and real‑time distress tracking, featuring interactive dashboards and integrations for weather, mapping, and image data.",
-      tags: ["All Projects", "AI & ML", "Website"],
-      techStack: ["React.js", "TypeScript", "Node.js", "Express.js", "MongoDB", "Docker"],
-      githubUrl: "https://github.com/Anushalatha/SeaSync.git",
-      category: "AI & ML"
-    },
-    {
-      title: "AgroMind",
-      description: "An AI‑powered agriculture platform for plant disease detection, crop recommendation, irrigation planning, and fertilizer guidance, enhanced with real‑time weather data. Features a responsive dashboard with analytics and an AI chatbot to deliver actionable farming insights.",
-      tags: ["All Projects", "AI & ML", "Website"],
-      techStack: ["React.js", "TypeScript", "Node.js", "Scikit-learn", "OpenCV", "FastAPI", "Supabase"],
-      githubUrl: "https://github.com/Anushalatha/AgroMind-AI.git",
-      category: "AI & ML"
-    },
-    {
-      title: "EduConnect",
-      description: "A collaborative learning and tutoring platform connecting students and educators, featuring AI-powered study tools, real-time sessions, and gamified progress tracking.",
-      tags: ["All Projects", "AI & ML", "Website"],
-      techStack: ["React.js", "TypeScript", "Node.js", "Supabase", "OpenAI API", "Tailwind CSS", "Framer Motion"],
-      githubUrl: "https://github.com/Anushalatha/EduConnect.git",
-      category: "AI & ML"
-    },
-    {
-      title: "TastyLens-AR",
-      description: "An AR-based food recognition and donation platform using AI and blockchain for social impact.",
-      tags: ["All Projects", "AI & ML", "Website"],
-      techStack: ["React.js", "TypeScript", "Node.js", "TensorFlow", "Ethereum", "Docker"],
-      demoUrl: "https://tastylensar.vercel.app/",
-      githubUrl: "https://github.com/Anushalatha/TastyLens-AR.git",
-      category: "AI & ML"
+      techStack: ["React.js", "TypeScript", "Node.js", "PyTorch", "FastAPI", "Three.js"],
+      githubUrl: "https://github.com/Anushalatha/DressFit",
+      demoUrl: "https://dress-fit-kappa.vercel.app/",
+      category: "FINAL YEAR PROJECT · AI/ML",
+      isFlagship: true
     },
     {
       title: "FinEcho",
-      description: "An AI-powered investment platform offering ESG scoring, portfolio analysis, and voice-based insights.",
+      description: "An AI-powered investment platform offering ESG scoring, portfolio analysis, and voice-based insights to help users manage asset risks.",
       tags: ["All Projects", "AI & ML", "Website"],
       techStack: ["React.js", "TypeScript", "Node.js", "PyTorch", "FastAPI"],
       demoUrl: "https://fin-echo.vercel.app/",
       githubUrl: "https://github.com/Anushalatha/FinEcho.git",
-      category: "AI & ML"
+      category: "FINTECH · AI / ANALYTICS"
     },
     {
-      title: "Heal-Fit",
-      description: "An AI health assistant for wellness tracking and scan-based diagnosis using Gemini AI.",
+      title: "TastyLens AR",
+      description: "An AR-based food recognition and charity donation platform using AI and blockchain for tracking public social impact.",
       tags: ["All Projects", "AI & ML", "Website"],
-      techStack: ["React.js", "TypeScript", "Flask", "TensorFlow", "GCP"],
-      demoUrl: "https://heal-fit.vercel.app/",
-      githubUrl: "https://github.com/Anushalatha/Heal-Fit.git",
-      category: "AI & ML"
+      techStack: ["React.js", "TypeScript", "Node.js", "TensorFlow", "Ethereum", "Docker"],
+      demoUrl: "https://tastylensar.vercel.app/",
+      githubUrl: "https://github.com/Anushalatha/TastyLens-AR.git",
+      category: "AR · COMPUTER VISION"
     },
     {
-      title: "Approval Management System",
-      description: "Web-based approval system with a responsive UI and secure user management.",
-      tags: ["All Projects", "Website"],
-      techStack: ["React.js", "TypeScript", "Node.js", "Express.js"],
-      demoUrl: "https://approval-management-system.vercel.app/",
-      githubUrl: "https://github.com/Anushalatha/Approval-Management-System.git",
-      category: "Website"
-    },
-    {
-      title: "Employee Performance Dashboard",
-      description: "Dashboard to track employee KPIs with interactive charts and analytics.",
-      tags: ["All Projects", "Data Science"],
+      title: "Employee Dashboard",
+      description: "Enterprise analytics dashboard to track employee performance KPIs with interactive database query pipelines and PowerBI chart reports.",
+      tags: ["All Projects", "Website", "Data Science"],
       techStack: ["React.js", "TypeScript", "Node.js", "PowerBI"],
       demoUrl: "https://employee-dashboard-one-psi.vercel.app/",
       githubUrl: "https://github.com/Anushalatha/Employee_dashboard.git",
-      category: "Data Science"
+      category: "FULL-STACK · ANALYTICS"
+    }
+  ],
+  publications: [
+    {
+      title: "A Hybrid Reality-Aware and Swarm Intelligent Architecture for Advanced Conversational Systems",
+      year: "2026"
     },
     {
-      title: "AI-Powered Stock Analyzer",
-      description: "Real-time AI dashboard for analyzing stock prices, alerts, and financial trends.",
-      tags: ["All Projects", "AI & ML", "Data Science"],
-      techStack: ["Python", "Streamlit", "Scikit-learn", "XGBoost", "Plotly"],
-      githubUrl: "https://github.com/Anushalatha/Stock-Analyser-Using-AI.git",
-      category: "AI & ML"
+      title: "TastyLens-AI: An AI-Powered Smart Food Ordering System with Adaptive Learning",
+      journal: "ICEET 2025",
+      year: "2025"
     },
     {
-      title: "Face Emotion Recognition",
-      description: "Model that detects emotions from facial expressions using CNN and RNN.",
-      tags: ["All Projects", "AI & ML"],
-      techStack: ["Python", "TensorFlow", "OpenCV", "Keras"],
-      githubUrl: "https://github.com/Anushalatha/Face_recognition.git",
-      category: "AI & ML"
+      title: "AI-Driven Personalized Fashion: Virtual Try-On, Smart Resale Authentication, and Sustainability Ranking",
+      journal: "ICEET 2025",
+      year: "2025"
     },
     {
-      title: "Gesture Recognition",
-      description: "LSTM-based model to recognize real-time hand gestures from videos.",
-      tags: ["All Projects", "AI & ML"],
-      techStack: ["Python", "TensorFlow", "OpenCV", "Keras"],
-      githubUrl: "https://github.com/Anushalatha/Gesture-Recognition-.git",
-      category: "AI & ML"
-    },
-    {
-      title: "HR Analysis Dashboard",
-      description: "A visual dashboard for HR teams to analyze employee data and trends.",
-      tags: ["All Projects", "Website", "Data Science"],
-      techStack: ["Streamlit", "Python", "PowerBI"],
-      githubUrl: "https://github.com/Anushalatha/Employee-Performance-Dashboard.git",
-      category: "Website"
-    },
-    {
-      title: "Power Outage Prediction",
-      description: "Web app that forecasts power outages using historical data and trends.",
-      tags: ["All Projects", "Data Science"],
-      techStack: ["Python", "Scikit-learn", "LightGBM", "Plotly"],
-      githubUrl: "https://github.com/Anushalatha/PowerPrediction.git",
-      category: "Data Science"
+      title: "Heal-Fit: AI-powered Personalized Healthcare Assistant Using Blockchain and Generative Intelligence",
+      journal: "ICIRES 2025",
+      year: "2025"
     }
   ],
   achievements: [
     {
       title: "Winners – All India Women's Only Hackathon",
-      description: "Secured top 5 position among 700+ teams for developing an AI-powered financial empowerment platform for underserved women. Cash prize of ₹12,500.",
+      description: "Secured top position for developing an AI-powered financial empowerment platform for underserved women. Cash prize of ₹12,500.",
       date: "2025"
     },
     {
       title: "1st Prize at Codeathon 3.0",
       description: "Won first place with ₹10,000 prize for innovative AI solution.",
-      date: "2025"
-    },
-    {
-      title: "TastyLens-AR: An AI-Powered Smart Food Ordering System with Adaptive Learning",
-      description: "Published research paper on AR food recognition technology at ICEET 2025.",
-      date: "2025"
-    },
-    {
-      title: "AI-Driven Personalized Fashion: Virtual Try-On, Smart Resale Authentication, and Sustainability Ranking",
-      description: "Published research on AI applications in fashion industry at ICEET 2025.",
-      date: "2025"
-    },
-    {
-      title: "Heal-Fit: AI-powered Personalized Healthcare Assistant Using Blockchain and Generative Intelligence",
-      description: "Published research on AI-powered healthcare solutions at ICIRES 2025.",
       date: "2025"
     }
   ],
@@ -301,13 +242,13 @@ export const resumeData: ResumeData = {
       title: "Introduction to Responsible AI",
       issuer: "Google Cloud",
       date: "2024",
-      url: "https://www.linkedin.com/posts/anusha-b-ai_introduction-to-responsible-ai-activity-7276151927732613120-H0B2?utm_source=share&utm_medium=member_desktop&rcm=ACoAAD-YLJcByxf6iOiI4xMq51fwnsRc0cCrYog"
+      url: "https://www.linkedin.com/posts/anusha-b-ai_introduction-to-responsible-ai-activity-7276151927732613120-H0B2"
     },
     {
       title: "Fundamentals of Generative AI",
       issuer: "Microsoft Learn",
       date: "2024",
-      url: "https://www.linkedin.com/posts/anusha-b-ai_fundamentals-of-generative-ai-activity-7294158063190581249-oACu?utm_source=share&utm_medium=member_desktop&rcm=ACoAAD-YLJcByxf6iOiI4xMq51fwnsRc0cCrYog"
+      url: "https://www.linkedin.com/posts/anusha-b-ai_fundamentals-of-generative-ai-activity-7294158063190581249-oACu"
     },
     {
       title: "BCG - GenAI Job Simulation",
@@ -331,7 +272,7 @@ export const resumeData: ResumeData = {
       title: "Microsoft Azure Fundamentals",
       issuer: "Microsoft",
       date: "2024",
-      url: "https://www.linkedin.com/posts/anusha-b-ai_microsoft-azure-fundamentals-describe-cloud-activity-7294018749865570304--gQr?utm_source=share&utm_medium=member_desktop&rcm=ACoAAD-YLJcByxf6iOiI4xMq51fwnsRc0cCrYog"
+      url: "https://www.linkedin.com/posts/anusha-b-ai_microsoft-azure-fundamentals-describe-cloud-activity-7294018749865570304--gQr"
     }
   ]
 };

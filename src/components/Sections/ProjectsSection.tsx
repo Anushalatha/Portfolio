@@ -1,100 +1,216 @@
-import React, { useState } from 'react';
-import { Github, ExternalLink } from 'lucide-react';
+import React from 'react';
 import { resumeData } from '../../data/resumeData';
 
-const ProjectsSection: React.FC = () => {
-  const categories = ['All Projects', 'AI & ML', 'Website', 'Data Science'];
-  const [activeCategory, setActiveCategory] = useState('All Projects');
-
-  const filteredProjects = activeCategory === 'All Projects'
-    ? resumeData.projects
-    : resumeData.projects.filter(project => project.tags.includes(activeCategory));
+// Technical abstract artwork for placeholders to give a premium engineering feel
+const ProjectPreview: React.FC<{ index: number; title: string }> = ({ index, title }) => {
+  const images = [
+    '/projects/dressfit.png',
+    '/projects/finecho.png',
+    '/projects/tastylens.png',
+    '/projects/employeedashboard.png'
+  ];
+  const imageUrl = images[index];
 
   return (
-    <section id="projects" className="py-24 relative bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 overflow-hidden">
-      <div className="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none"></div>
-      <div className="container mx-auto px-4 md:px-6 relative z-10">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            My Projects
-          </h2>
-          <div className="w-20 h-1.5 bg-blue-600 rounded-full mx-auto mb-6"></div>
-          <p className="text-lg text-gray-700 dark:text-gray-300 max-w-2xl mx-auto">
-            Explore my portfolio of AI, web development, and data science projects
+    <div className="w-full h-full min-h-[220px] bg-[#09002a]/20 border border-[#2A0E61]/80 overflow-hidden relative group-hover:border-[#7042f88b] transition-colors duration-500 flex items-center justify-center rounded-lg">
+      {imageUrl ? (
+        <img 
+          src={imageUrl} 
+          alt={`${title} Preview`}
+          className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+          loading="lazy"
+        />
+      ) : (
+        <div className="text-slate-400 font-mono text-[9px]">Preview Unavailable</div>
+      )}
+      {/* Subtle overlay gradient */}
+      <div className="absolute inset-0 bg-gradient-to-t from-[#030014]/60 via-transparent to-transparent pointer-events-none"></div>
+      
+      {/* Graphic border element */}
+      <div className="absolute top-3 right-3 flex space-x-1">
+        <span className="w-1.5 h-1.5 rounded-full bg-[#2A0E61] border border-[#7042f861]/40"></span>
+        <span className="w-1.5 h-1.5 rounded-full bg-[#2A0E61] border border-[#7042f861]/40"></span>
+        <span className="w-1.5 h-1.5 rounded-full bg-purple-500/40 animate-pulse"></span>
+      </div>
+    </div>
+  );
+};
+
+const ProjectsSection: React.FC = () => {
+  // We want EXACTLY the first four projects in order:
+  // 01 DressFit, 02 FinEcho, 03 TastyLens AR, 04 Employee Dashboard
+  const selectedProjects = resumeData.projects.slice(0, 4);
+
+  return (
+    <section id="projects" className="py-28 relative bg-[#030014] border-b border-[#2A0E61]/45">
+      <div className="absolute inset-0 bg-grid-pattern opacity-40 pointer-events-none"></div>
+      
+      <div className="container mx-auto px-6 md:px-12 relative z-10 max-w-6xl">
+        {/* Section Header */}
+        <div className="mb-20 text-center md:text-left">
+          <p className="font-display text-[10px] tracking-[0.25em] text-purple-400 uppercase font-semibold mb-2">
+            PORTFOLIO HIGHLIGHTS
           </p>
+          <h2 className="font-display text-3xl md:text-4xl font-bold tracking-tight text-white uppercase">
+            SELECTED WORK
+          </h2>
+          <div className="w-12 h-[1px] bg-[#2A0E61] mt-4 mx-auto md:mx-0"></div>
         </div>
-        {/* Category Filter */}
-        <div className="flex flex-wrap justify-center gap-3 mb-12">
-          {categories.map((category) => (
-            <button
-              key={category}
-              onClick={() => setActiveCategory(category)}
-              className={`px-4 py-2 rounded-full transition-transform duration-200 hover:scale-105 hover:shadow-lg ${
-                activeCategory === category
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
-              }`}
-            >
-              {category}
-            </button>
-          ))}
-        </div>
-        {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {filteredProjects.map((project, index) => (
-            <div 
-              key={index}
-              className="bg-white/30 dark:bg-gray-800/30 backdrop-blur-md rounded-xl shadow-lg p-6 border border-white/20 transition-transform duration-200 hover:scale-105 hover:shadow-xl"
-            >
-              <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-                <div className="flex-1">
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
-                    {project.title}
-                  </h3>
-                  <p className="text-gray-700 dark:text-gray-300 mb-4">
-                    {project.description}
-                  </p>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.techStack.map((tech, idx) => (
-                      <span
-                        key={idx}
-                        className="px-3 py-1 text-sm font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 rounded-full"
-                      >
-                        {tech}
-                      </span>
-                    ))}
+
+        {/* Selected Work Layout */}
+        <div className="flex flex-col gap-16">
+          {selectedProjects.map((project, index) => {
+            const isFlagship = project.isFlagship;
+            const projectNumber = `0${index + 1}`;
+            
+            if (isFlagship) {
+              // Full-width flagged layout for DressFit
+              return (
+                <div 
+                  key={project.title}
+                  className="editorial-card p-6 md:p-10 flex flex-col lg:flex-row gap-10 items-stretch bg-[#09002a]/15 border border-[#2A0E61]/70 shadow-[0_0_15px_rgba(112,66,248,0.05)] rounded-lg backdrop-blur-sm"
+                >
+                  <div className="flex-1 flex flex-col justify-between">
+                    <div>
+                      {/* Technical Header details */}
+                      <div className="flex items-center justify-between mb-4">
+                        <span className="font-display text-4xl font-bold text-[#2A0E61] tracking-tighter">
+                          {projectNumber}
+                        </span>
+                        <div className="flex items-center space-x-2">
+                          <span className="px-2 py-0.5 text-[8px] tracking-widest font-mono text-purple-300 bg-[#7042f88b]/15 border border-[#7042f861]/50 rounded-full font-bold">
+                            FINAL YEAR PROJECT
+                          </span>
+                          <span className="px-2 py-0.5 text-[8px] tracking-widest font-mono text-slate-400 bg-[#2A0E61]/30 border border-[#2A0E61]/65 rounded-full uppercase">
+                            {project.category.replace('FINAL YEAR PROJECT · ', '')}
+                          </span>
+                        </div>
+                      </div>
+                      
+                      <h3 className="font-display text-2xl md:text-3xl font-bold text-white uppercase mb-4 tracking-tight">
+                        {project.title}
+                      </h3>
+                      
+                      <p className="text-sm text-[#B4B6C3] font-light leading-relaxed mb-6 font-light">
+                        {project.description}
+                      </p>
+                    </div>
+
+                    <div>
+                      {/* Tech stack tags */}
+                      <div className="flex flex-wrap gap-2 mb-8">
+                        {project.techStack.map((tech) => (
+                          <span 
+                            key={tech} 
+                            className="font-mono text-[9px] tracking-wider text-[#B4B6C3] bg-[#0300145e]/50 border border-[#2A0E61] px-2.5 py-1"
+                          >
+                            {tech.toUpperCase()}
+                          </span>
+                        ))}
+                      </div>
+
+                      {/* CTAs */}
+                      <div className="flex flex-wrap gap-4 border-t border-[#2A0E61]/40 pt-6">
+                        {project.demoUrl && (
+                          <a 
+                            href={project.demoUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="font-display text-[10px] tracking-widest font-bold text-white hover:text-purple-400 transition-colors"
+                          >
+                            VIEW PROJECT ↗
+                          </a>
+                        )}
+                        <a 
+                          href={project.githubUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="font-display text-[10px] tracking-widest text-[#7042f8] hover:text-white transition-colors"
+                        >
+                          GITHUB ↗
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="lg:w-[45%] flex-shrink-0">
+                    <ProjectPreview index={index} title={project.title} />
                   </div>
                 </div>
-                <div className="flex flex-row md:flex-col gap-4 md:gap-2">
-                  <a
-                    href={project.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 bg-gray-100 dark:bg-gray-800 rounded-md transition-transform duration-200 hover:scale-105 hover:shadow-lg"
-                  >
-                    <Github size={18} className="mr-2" />
-                    <span>Code</span>
-                  </a>
-                  {project.demoUrl && (
-                    <a
-                      href={project.demoUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md transition-transform duration-200 hover:scale-105 hover:shadow-lg"
-                    >
-                      <ExternalLink size={18} className="mr-2" />
-                      <span>Live Demo</span>
-                    </a>
-                  )}
+              );
+            }
+
+            // Normal grid rows for FinEcho, TastyLens AR, Employee Dashboard
+            return (
+              <div 
+                key={project.title}
+                className="group border border-[#2A0E61] bg-[#09002a]/15 hover:border-[#7042f88b] hover:bg-[#09002a]/30 p-6 md:p-8 flex flex-col md:flex-row gap-8 items-stretch transition-all duration-500 ease-out rounded-lg shadow-lg hover:shadow-[0_0_15px_rgba(112,66,248,0.15)] animate-fadeIn"
+              >
+                <div className="md:w-[35%] flex-shrink-0">
+                  <ProjectPreview index={index} title={project.title} />
+                </div>
+
+                <div className="flex-1 flex flex-col justify-between">
+                  <div>
+                    {/* Header bar */}
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="font-display text-3xl font-extrabold text-[#2A0E61] tracking-tighter">
+                        {projectNumber}
+                      </span>
+                      <span className="px-2.5 py-0.5 text-[8px] tracking-widest font-mono text-slate-400 bg-[#2A0E61]/30 border border-[#2A0E61]/65 rounded-full uppercase">
+                        {project.category}
+                      </span>
+                    </div>
+
+                    <h3 className="font-display text-xl font-bold text-white uppercase mb-3 group-hover:text-purple-400 transition-colors duration-300">
+                      {project.title}
+                    </h3>
+                    
+                    <p className="text-xs text-[#B4B6C3] font-light leading-relaxed mb-6 font-light">
+                      {project.description}
+                    </p>
+                  </div>
+
+                  <div>
+                    {/* Tags */}
+                    <div className="flex flex-wrap gap-1.5 mb-6">
+                      {project.techStack.map((tech) => (
+                        <span 
+                          key={tech} 
+                          className="font-mono text-[8px] tracking-wider text-[#B4B6C3] bg-[#0300145e]/50 border border-[#2A0E61] px-2 py-0.5"
+                        >
+                          {tech.toUpperCase()}
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* CTAs */}
+                    <div className="flex gap-4 border-t border-[#2A0E61]/40 pt-4">
+                      {project.demoUrl && (
+                        <a 
+                          href={project.demoUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="font-display text-[9px] tracking-widest font-bold text-white hover:text-purple-400 transition-colors"
+                        >
+                          LIVE DEMO ↗
+                        </a>
+                      )}
+                      <a 
+                        href={project.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-display text-[9px] tracking-widest text-[#7042f8] hover:text-white transition-colors"
+                      >
+                        GITHUB ↗
+                      </a>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
-      </div>
-      {/* Animated scroll indicator */}
-      <div className="flex justify-center mt-12 animate-bounce">
-        <svg className="w-8 h-8 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" /></svg>
       </div>
     </section>
   );

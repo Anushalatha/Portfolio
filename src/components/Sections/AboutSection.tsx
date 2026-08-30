@@ -1,116 +1,108 @@
 import React from 'react';
 import { resumeData } from '../../data/resumeData';
-import { Brain, Globe2, Target } from 'lucide-react';
 
 const AboutSection: React.FC = () => {
   return (
-    <section id="about" className="py-24 relative bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 overflow-hidden">
-      {/* Subtle grid pattern background */}
-      <div className="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none"></div>
-      <div className="container mx-auto px-4 md:px-6 relative z-10">
-        <div className="flex flex-col items-center">
-          {/* Glassmorphism Profile Card */}
-          <div className="bg-white/30 dark:bg-gray-800/30 backdrop-blur-md rounded-xl shadow-lg p-8 border border-white/20 mb-8 flex flex-col items-center">
-            <img
-              src="/my-profile.jpg.jpeg"
-              alt="Profile"
-              className="w-40 h-40 object-cover rounded-full border-4 border-blue-200 dark:border-blue-800 shadow-xl mb-4"
-            />
-            <h3 className="mt-2 text-2xl font-bold text-gray-900 dark:text-white">{resumeData.name}</h3>
-            <p className="text-blue-600 dark:text-blue-400">{resumeData.title}</p>
-          </div>
-          <div className="w-full max-w-4xl">
-            <div className="mb-6">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2">
-                About Me
-              </h2>
-              <div className="w-20 h-1.5 bg-blue-600 rounded-full mb-6"></div>
+    <section id="about" className="py-28 relative bg-[#030014] border-b border-[#2A0E61]/40">
+      <div className="absolute inset-0 bg-grid-pattern opacity-40 pointer-events-none"></div>
+
+      <div className="container mx-auto px-6 md:px-12 relative z-10 max-w-6xl">
+        
+        {/* Section Header */}
+        <div className="mb-20 text-center md:text-left">
+          <p className="font-display text-[10px] tracking-[0.25em] text-purple-400 uppercase font-semibold mb-2">
+            BACKGROUND DETAILS
+          </p>
+          <h2 className="font-display text-3xl md:text-4xl font-bold tracking-tight text-white uppercase">
+            ABOUT ME
+          </h2>
+          <div className="w-12 h-[1px] bg-[#2A0E61] mt-4 mx-auto md:mx-0"></div>
+        </div>
+
+        {/* Info Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+          
+          {/* Profile Card Left: 4 Cols */}
+          <div className="lg:col-span-4 bg-[#09002a]/15 border border-[#2A0E61]/70 p-6 flex flex-col items-center text-center rounded-lg shadow-[0_0_15px_rgba(112,66,248,0.05)] backdrop-blur-sm">
+            <div className="w-40 h-40 border border-[#2A0E61] p-2 mb-6 relative overflow-hidden group rounded-lg">
+              <img
+                src="/Profile.png"
+                alt="Anusha B"
+                className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105 rounded-md"
+              />
             </div>
-            
-            <div className="prose prose-lg dark:prose-invert max-w-none mb-12">
-              <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
+            <h3 className="font-display text-lg font-bold text-white uppercase tracking-wide mb-1">
+              ANUSHA B<span className="text-purple-400">.</span>
+            </h3>
+            <p className="font-display text-[10px] tracking-widest text-[#B4B6C3] uppercase font-semibold mb-6">
+              AI/ML ENGINEER &amp; FULL-STACK DEVELOPER
+            </p>
+            <div className="w-full border-t border-[#2A0E61]/50 pt-4 flex flex-col gap-2 text-left font-display text-[10px] tracking-wider text-slate-400">
+              <div>
+                <span className="text-purple-400 font-bold">LOCATION:</span> CHENNAI, INDIA
+              </div>
+              <div>
+                <span className="text-purple-400 font-bold">EMAIL:</span> {resumeData.email}
+              </div>
+            </div>
+          </div>
+
+          {/* Biography and Details Right: 8 Cols */}
+          <div className="lg:col-span-8 flex flex-col gap-10">
+            <div>
+              <h3 className="font-display text-xs font-bold tracking-widest text-purple-400 uppercase mb-4">
+                BIOGRAPHY
+              </h3>
+              <p className="text-sm md:text-base text-slate-300 font-light leading-relaxed mb-6">
                 {resumeData.about}
               </p>
             </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-              {/* Soft Skills */}
-              <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg">
-                <div className="flex items-center mb-4">
-                  <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mr-3">
-                    <Brain className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-                  </div>
-                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Soft Skills</h3>
-                </div>
-                <ul className="space-y-2">
-                  <li className="text-gray-700 dark:text-gray-300">• Self-Learner</li>
-                  <li className="text-gray-700 dark:text-gray-300">• Problem Solving</li>
-                  <li className="text-gray-700 dark:text-gray-300">• Leadership</li>
-                  <li className="text-gray-700 dark:text-gray-300">• Critical Thinking</li>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 pt-8 border-t border-[#2A0E61]/40">
+              
+              {/* Focus Areas */}
+              <div>
+                <h4 className="font-display text-[10px] tracking-widest font-bold text-white uppercase mb-4">
+                  FOCUS AREAS
+                </h4>
+                <ul className="space-y-2 font-display text-xs text-slate-450">
+                  <li>• Computer Vision</li>
+                  <li>• Deep Learning</li>
+                  <li>• Full-Stack Architecture</li>
+                  <li>• Swarm Intelligence</li>
                 </ul>
               </div>
 
-              {/* Languages */}
-              <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg">
-                <div className="flex items-center mb-4">
-                  <div className="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mr-3">
-                    <Globe2 className="w-5 h-5 text-green-600 dark:text-green-400" />
-                  </div>
-                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Languages</h3>
-                </div>
-                <ul className="space-y-2">
-                  <li className="text-gray-700 dark:text-gray-300">• Tamil</li>
-                  <li className="text-gray-700 dark:text-gray-300">• Telugu (Native)</li>
-                  <li className="text-gray-700 dark:text-gray-300">• English (Professional)</li>
+              {/* Core Strengths */}
+              <div>
+                <h4 className="font-display text-[10px] tracking-widest font-bold text-white uppercase mb-4">
+                  STRENGTHS
+                </h4>
+                <ul className="space-y-2 font-display text-xs text-slate-450">
+                  <li>• System Design</li>
+                  <li>• Critical Analysis</li>
+                  <li>• Autonomous Agents</li>
+                  <li>• Hackathon Leadership</li>
                 </ul>
               </div>
 
-              {/* Interests */}
-              <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg">
-                <div className="flex items-center mb-4">
-                  <div className="w-10 h-10 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center mr-3">
-                    <Target className="w-5 h-5 text-purple-600 dark:text-purple-400" />
-                  </div>
-                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Interests</h3>
-                </div>
-                <ul className="space-y-2">
-                  <li className="text-gray-700 dark:text-gray-300">• Artificial Intelligence</li>
-                  <li className="text-gray-700 dark:text-gray-300">• Web Development</li>
-                  <li className="text-gray-700 dark:text-gray-300">• Data Science</li>
-                  <li className="text-gray-700 dark:text-gray-300">• Hackathons</li>
-                  <li className="text-gray-700 dark:text-gray-300">• Research</li>
+              {/* Communication */}
+              <div>
+                <h4 className="font-display text-[10px] tracking-widest font-bold text-white uppercase mb-4">
+                  LANGUAGES
+                </h4>
+                <ul className="space-y-2 font-display text-xs text-slate-450">
+                  <li>• Tamil (Conversational)</li>
+                  <li>• Telugu (Native)</li>
+                  <li>• English (Professional)</li>
                 </ul>
               </div>
-            </div>
-            
-            <div className="flex flex-col sm:flex-row gap-4 mt-8">
-              <a
-                href="#contact"
-                className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-md transition-transform duration-200 hover:scale-105 hover:shadow-lg inline-flex items-center justify-center"
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-                }}
-              >
-                Get In Touch
-              </a>
-              <a
-                href="#projects"
-                className="bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 font-medium py-3 px-6 border border-gray-300 dark:border-gray-700 rounded-md transition-transform duration-200 hover:scale-105 hover:shadow-lg inline-flex items-center justify-center"
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
-                }}
-              >
-                View Projects
-              </a>
+
             </div>
           </div>
+
         </div>
-      </div>
-      {/* Animated scroll indicator */}
-      <div className="flex justify-center mt-12 animate-bounce">
-        <svg className="w-8 h-8 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" /></svg>
+
       </div>
     </section>
   );

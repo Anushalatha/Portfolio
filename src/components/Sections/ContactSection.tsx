@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Send, Mail, MapPin, Linkedin } from 'lucide-react';
 import { resumeData } from '../../data/resumeData';
 
 const ContactSection: React.FC = () => {
@@ -22,6 +21,7 @@ const ContactSection: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitError(false);
     
     // Simulate form submission
     setTimeout(() => {
@@ -33,212 +33,154 @@ const ContactSection: React.FC = () => {
       setTimeout(() => {
         setSubmitSuccess(false);
       }, 5000);
-    }, 1500);
+    }, 1200);
   };
 
   return (
-    <section id="contact" className="py-24 relative bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 overflow-hidden">
-      <div className="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none"></div>
-      <div className="container mx-auto px-4 md:px-6 relative z-10">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            Get In Touch
-          </h2>
-          <div className="w-20 h-1.5 bg-blue-600 rounded-full mx-auto mb-6"></div>
-          <p className="text-lg text-gray-700 dark:text-gray-300 max-w-2xl mx-auto">
-            Have a question or want to work together? Feel free to contact me!
-          </p>
-        </div>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Contact Information */}
-          <div className="bg-white/30 dark:bg-gray-800/30 backdrop-blur-md rounded-xl shadow-lg p-8 border border-white/20">
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-              Contact Information
-            </h3>
-            
-            <div className="space-y-6">
-              <div className="flex items-start">
-                <div className="bg-blue-100 dark:bg-blue-900/30 p-3 rounded-full mr-4">
-                  <Mail size={20} className="text-blue-600 dark:text-blue-400" />
-                </div>
-                <div>
-                  <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
-                    Email
-                  </h4>
-                  <a 
-                    href={`mailto:${resumeData.email}`}
-                    className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300"
-                  >
-                    {resumeData.email}
-                  </a>
-                </div>
-              </div>
-              
-              <div className="flex items-start">
-                <div className="bg-blue-100 dark:bg-blue-900/30 p-3 rounded-full mr-4">
-                  <MapPin size={20} className="text-blue-600 dark:text-blue-400" />
-                </div>
-                <div>
-                  <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
-                    Location
-                  </h4>
-                  <p className="text-gray-700 dark:text-gray-300">
-                    {resumeData.location}
-                  </p>
-                </div>
-              </div>
-              
-              <div className="flex items-start">
-                <div className="bg-blue-100 dark:bg-blue-900/30 p-3 rounded-full mr-4">
-                  <Linkedin size={20} className="text-blue-600 dark:text-blue-400" />
-                </div>
-                <div>
-                  <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
-                    LinkedIn
-                  </h4>
-                  <a 
-                    href="https://www.linkedin.com/in/anusha-b-ai"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300"
-                  >
-                    linkedin.com/in/anusha-b-ai
-                  </a>
-                </div>
-              </div>
+    <section id="contact" className="py-28 relative bg-[#030014] border-b border-[#2A0E61]/45">
+      <div className="absolute inset-0 bg-grid-pattern opacity-40 pointer-events-none"></div>
+
+      <div className="container mx-auto px-6 md:px-12 relative z-10 max-w-6xl">
+        
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
+          
+          {/* Left Column: Big typography & social linkages */}
+          <div className="lg:col-span-5 flex flex-col justify-between">
+            <div>
+              <p className="font-display text-[10px] tracking-[0.25em] text-purple-400 uppercase font-semibold mb-3">
+                GET IN TOUCH
+              </p>
+              <h2 className="font-display text-4xl md:text-5xl font-black tracking-tight text-white uppercase leading-[1.1] mb-8">
+                LET'S BUILD<br/>SOMETHING<br/>INTELLIGENT<span className="text-purple-500">.</span>
+              </h2>
+              <p className="text-xs text-slate-400 font-light leading-relaxed max-w-sm mb-12">
+                If you are looking to collaborate on machine learning systems, full-stack application development, or research projects, reach out today.
+              </p>
             </div>
-            
-            <div className="mt-12">
-              <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-                Connect With Me
-              </h4>
-              <div className="flex space-x-4">
-                {resumeData.socialLinks.map((link, index) => {
-                  const Icon = link.icon;
-                  return (
-                    <a
-                      key={index}
-                      href={link.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="bg-white dark:bg-gray-900 p-3 rounded-full shadow-sm hover:shadow-md transition-shadow duration-300 hover:bg-blue-50 dark:hover:bg-blue-900/20"
-                      aria-label={link.label}
-                    >
-                      <Icon size={20} className="text-blue-600 dark:text-blue-400" />
-                    </a>
-                  );
-                })}
+
+            <div className="flex flex-col gap-6 border-t border-[#2A0E61]/40 pt-8">
+              <div>
+                <span className="font-display text-[9px] tracking-widest text-[#B4B6C3] block mb-1 uppercase font-bold">WRITE EMAIL</span>
+                <a 
+                  href={`mailto:${resumeData.email}`} 
+                  className="font-mono text-xs text-purple-400 hover:text-white transition-colors"
+                >
+                  {resumeData.email}
+                </a>
+              </div>
+              
+              <div className="flex gap-8">
+                <div>
+                  <span className="font-display text-[9px] tracking-widest text-[#B4B6C3] block mb-1 uppercase font-bold">LINKEDIN</span>
+                  <a 
+                    href="https://www.linkedin.com/in/anusha-b-ai" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="font-mono text-xs text-slate-400 hover:text-white transition-colors"
+                  >
+                    LINKEDIN.COM/IN/ANUSHA-B-AI
+                  </a>
+                </div>
+
+                <div>
+                  <span className="font-display text-[9px] tracking-widest text-[#B4B6C3] block mb-1 uppercase font-bold">GITHUB</span>
+                  <a 
+                    href="https://github.com/Anushalatha" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="font-mono text-xs text-slate-400 hover:text-white transition-colors"
+                  >
+                    GITHUB.COM/ANUSHALATHA
+                  </a>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Contact Form */}
-          <form onSubmit={handleSubmit} className="bg-white/30 dark:bg-gray-800/30 backdrop-blur-md rounded-xl shadow-lg p-8 border border-white/20">
-            {/* Success Message */}
-            {submitSuccess && (
-              <div className="bg-green-100 dark:bg-green-900/30 border border-green-200 dark:border-green-800 text-green-800 dark:text-green-300 rounded-lg p-4 mb-6">
-                Your message has been sent successfully! I'll get back to you soon.
+          {/* Right Column: Inverted Form */}
+          <div className="lg:col-span-7">
+            <form onSubmit={handleSubmit} className="space-y-6 bg-[#09002a]/15 border border-[#2A0E61] p-8 md:p-10 relative rounded-lg shadow-lg backdrop-blur-sm shadow-[0_0_15px_rgba(112,66,248,0.02)]">
+              {submitSuccess && (
+                <div className="bg-[#7042f88b]/15 border border-[#7042f861]/50 text-purple-305 font-display text-xs p-4 rounded-sm tracking-wide">
+                  MESSAGE SECURELY REGISTERED. I WILL CORRESPOND SHORTLY.
+                </div>
+              )}
+              {submitError && (
+                <div className="bg-red-500/10 border border-red-500/35 text-red-505 font-display text-xs p-4 rounded-sm tracking-wide">
+                  AN ERROR OCCURRED. PLEASE TRY AGAIN.
+                </div>
+              )}
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label htmlFor="name" className="font-display text-[9px] tracking-wider text-[#B4B6C3] uppercase block mb-2 font-semibold">YOUR NAME</label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                    className="w-full bg-[#030014]/60 border border-[#2A0E61] p-3 font-display text-xs text-white focus:outline-none focus:border-[#7042f88b] transition-colors rounded-lg shadow-sm"
+                    placeholder="Enter name"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="email" className="font-display text-[9px] tracking-wider text-[#B4B6C3] uppercase block mb-2 font-semibold">YOUR EMAIL</label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    className="w-full bg-[#030014]/60 border border-[#2A0E61] p-3 font-display text-xs text-white focus:outline-none focus:border-[#7042f88b] transition-colors rounded-lg shadow-sm"
+                    placeholder="name@domain.com"
+                  />
+                </div>
               </div>
-            )}
-            
-            {/* Error Message */}
-            {submitError && (
-              <div className="bg-red-100 dark:bg-red-900/30 border border-red-200 dark:border-red-800 text-red-800 dark:text-red-300 rounded-lg p-4 mb-6">
-                There was an error sending your message. Please try again.
-              </div>
-            )}
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
               <div>
-                <label 
-                  htmlFor="name" 
-                  className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
-                >
-                  Your Name
-                </label>
+                <label htmlFor="subject" className="font-display text-[9px] tracking-wider text-[#B4B6C3] uppercase block mb-2 font-semibold">SUBJECT</label>
                 <input
                   type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
+                  id="subject"
+                  name="subject"
+                  value={formData.subject}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-200"
-                  placeholder="John Doe"
+                  className="w-full bg-[#030014]/60 border border-[#2A0E61] p-3 font-display text-xs text-white focus:outline-none focus:border-[#7042f88b] transition-colors rounded-lg shadow-sm"
+                  placeholder="Inquiry subject"
                 />
               </div>
-              
+
               <div>
-                <label 
-                  htmlFor="email" 
-                  className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
-                >
-                  Your Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
+                <label htmlFor="message" className="font-display text-[9px] tracking-wider text-[#B4B6C3] uppercase block mb-2 font-semibold">MESSAGE</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  value={formData.message}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-200"
-                  placeholder="john@example.com"
+                  rows={5}
+                  className="w-full bg-[#030014]/60 border border-[#2A0E61] p-3 font-display text-xs text-white focus:outline-none focus:border-[#7042f88b] transition-colors rounded-lg resize-none shadow-sm"
+                  placeholder="Write details of the engagement..."
                 />
               </div>
-            </div>
-            
-            <div>
-              <label 
-                htmlFor="subject" 
-                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full bg-[#7042f88b]/20 border border-[#7042f861] hover:bg-[#7042f88b]/40 text-white font-display text-xs uppercase tracking-widest font-bold py-3.5 px-6 transition-all duration-300 disabled:opacity-50 rounded-full shadow-[0_0_15px_rgba(112,66,248,0.15)]"
               >
-                Subject
-              </label>
-              <input
-                type="text"
-                id="subject"
-                name="subject"
-                value={formData.subject}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-200"
-                placeholder="Project Inquiry"
-              />
-            </div>
-            
-            <div>
-              <label 
-                htmlFor="message" 
-                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
-              >
-                Your Message
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                required
-                rows={5}
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-200"
-                placeholder="How can I help you?"
-              />
-            </div>
-            
-            <button
-              type="submit"
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-md transition-transform duration-200 hover:scale-105 hover:shadow-lg mt-4"
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? 'Sending...' : 'Send Message'}
-            </button>
-          </form>
+                {isSubmitting ? 'TRANSMITTING...' : 'SEND MESSAGE ↗'}
+              </button>
+            </form>
+          </div>
+
         </div>
-      </div>
-      {/* Animated scroll indicator */}
-      <div className="flex justify-center mt-12 animate-bounce">
-        <svg className="w-8 h-8 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" /></svg>
+
       </div>
     </section>
   );
