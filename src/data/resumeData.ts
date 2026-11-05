@@ -67,10 +67,10 @@ export interface ResumeData {
 
 export const resumeData: ResumeData = {
   name: "Anusha B",
-  title: "AI/ML Engineer & Full-Stack Developer",
+  title: "AI Systems Engineer | Generative AI | Agentic Systems | Full-Stack Engineering",
   location: "Chennai, Tamil Nadu, India",
   email: "anushalathaaa7@gmail.com",
-  resumeUrl: "/Anusha B Resume.pdf",
+  resumeUrl: "/Anusha B 2026 Resume.pdf",
   socialLinks: [
     {
       icon: Github,
@@ -88,12 +88,12 @@ export const resumeData: ResumeData = {
       label: "Email"
     }
   ],
-  about: "I build intelligent systems and full-stack applications that combine machine learning, software engineering, and practical product thinking. Specializing in computer vision, deep learning pipelines, and robust backend engineering, I focus on solving complex computational problems and designing scalable products that deliver real user impact.",
+  about: "I build intelligent applications and production-oriented AI systems, bringing together generative AI, retrieval infrastructure, agentic workflows, backend engineering, and modern interfaces. I care about the systems around a model: how information is prepared, tools are orchestrated, outputs are evaluated, and applications are delivered reliably.",
   experiences: [
     {
       company: "Point Pikkers",
       position: "Full-Stack Developer",
-      duration: "Jan 2026 – May 2026",
+      duration: "Jan 2026 – Present",
       bullets: [
         "Engineered scalable web applications by leveraging React, TypeScript, and Node.js REST services.",
         "Designed, integrated, and optimized backend databases, boosting data retrieval performance.",
@@ -149,20 +149,24 @@ export const resumeData: ResumeData = {
   ],
   skills: [
     {
-      category: "AI / MACHINE LEARNING",
-      items: ["TensorFlow", "PyTorch", "Keras", "Scikit-learn", "XGBoost", "LightGBM", "CNN", "RNN", "LSTM", "LLMs", "FastAPI"]
+      category: "AI & GENERATIVE AI",
+      items: ["LLM Integration", "RAG", "Prompt Engineering", "AI Agents", "Tool Calling", "Structured Outputs", "LangChain", "LangGraph", "LlamaIndex", "Gemini"]
     },
     {
-      category: "FULL-STACK DEVELOPMENT",
-      items: ["React.js", "TypeScript", "Tailwind CSS", "Node.js", "Express.js", "Flask", "HTML5", "CSS3", "JavaScript"]
+      category: "MACHINE LEARNING",
+      items: ["Scikit-learn", "TensorFlow", "PyTorch", "XGBoost", "LightGBM", "Model Development", "Computer Vision"]
     },
     {
-      category: "DATA & ANALYTICS",
-      items: ["PowerBI", "Plotly", "Dash", "Matplotlib", "Seaborn", "Streamlit", "SQL", "MongoDB", "Supabase"]
+      category: "BACKEND ENGINEERING",
+      items: ["Python", "FastAPI", "Node.js", "Express.js", "REST APIs", "Pydantic"]
     },
     {
-      category: "TOOLS & PLATFORMS",
-      items: ["Git", "Docker", "GCP", "Azure", "Blockchain", "Vercel", "Vite", "Linux"]
+      category: "FRONTEND ENGINEERING",
+      items: ["React", "TypeScript", "JavaScript", "Tailwind CSS", "React Flow"]
+    },
+    {
+      category: "INFRASTRUCTURE & DATA",
+      items: ["Docker", "Git", "GitHub", "CI/CD", "Deployment", "Monitoring", "PostgreSQL", "MongoDB", "SQL", "Qdrant", "Supabase"]
     }
   ],
   projects: [

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Header from './components/Layout/Header';
 import Footer from './components/Layout/Footer';
 import HeroSection from './components/Sections/HeroSection';
@@ -6,33 +6,56 @@ import AboutSection from './components/Sections/AboutSection';
 import ExperienceSection from './components/Sections/ExperienceSection';
 import SkillsSection from './components/Sections/SkillsSection';
 import ProjectsSection from './components/Sections/ProjectsSection';
+import ArchitectureSection from './components/Sections/ArchitectureSection';
+import GitHubSection from './components/Sections/GitHubSection';
+import TerminalSection from './components/Sections/TerminalSection';
 import ResearchSection from './components/Sections/ResearchSection';
 import ContactSection from './components/Sections/ContactSection';
 import './index.css';
 
+type Theme = 'light' | 'dark';
+
+function getInitialTheme(): Theme {
+  try {
+    const savedTheme = window.localStorage.getItem('portfolio-theme');
+    return savedTheme === 'light' || savedTheme === 'dark' ? savedTheme : 'dark';
+  } catch (error) {
+    console.warn('Unable to read the saved theme preference.', error);
+    return 'dark';
+  }
+}
+
 function App() {
+  const [theme, setTheme] = useState<Theme>(getInitialTheme);
+
   useEffect(() => {
-    // Update the document title
-    document.title = "Anusha B | AI/ML Engineer & Full-Stack Developer";
-    
-    // Remove dark mode lock
-    document.documentElement.classList.remove('dark');
-  }, []);
+    document.title = 'Anusha B | AI Systems Engineer';
+    document.documentElement.dataset.theme = theme;
+    document.documentElement.style.colorScheme = theme;
+    try {
+      window.localStorage.setItem('portfolio-theme', theme);
+    } catch (error) {
+      console.warn('Unable to save the theme preference.', error);
+    }
+  }, [theme]);
 
   return (
-    <div className="min-h-screen bg-[#090A0F] text-[#F3F4F6] transition-colors duration-300">
-      <Header isDarkMode={true} toggleDarkMode={() => {}} />
-      
+    <div className="site-shell">
+      <Header theme={theme} toggleTheme={() => setTheme(theme === 'dark' ? 'light' : 'dark')} />
+
       <main>
         <HeroSection />
         <AboutSection />
         <SkillsSection />
-        <ProjectsSection />
         <ExperienceSection />
+        <ProjectsSection />
+        <ArchitectureSection />
+        <GitHubSection />
+        <TerminalSection />
         <ResearchSection />
         <ContactSection />
       </main>
-      
+
       <Footer />
     </div>
   );
