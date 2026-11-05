@@ -2,7 +2,7 @@ import { ArrowUpRight, ExternalLink, Feather } from 'lucide-react';
 import Reveal from '../Reveal';
 import { writingArticles } from '../../data/writingArticles';
 
-const mediumProfileUrl = 'https://medium.com/@anushalathaaa7';
+const mediumProfileUrl = 'https://medium.com/@anushabodi';
 
 function WritingSection() {
   return (
