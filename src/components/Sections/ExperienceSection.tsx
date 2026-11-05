@@ -10,7 +10,7 @@ function ExperienceSection() {
           <p className="eyebrow">03 — Professional timeline</p>
           <h2>Experience built<br />one system at a time.</h2>
           <p>Roles across full-stack engineering, machine learning, and data analysis.</p>
-          <a className="text-link" href="/Anusha B 2026 Resume.pdf" download>
+          <a className="text-link" href={resumeData.resumeUrl} download>
             Full resume <ArrowUpRight size={16} />
           </a>
         </Reveal>

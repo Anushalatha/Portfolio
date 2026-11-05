@@ -70,7 +70,7 @@ export const resumeData: ResumeData = {
   title: "AI Systems Engineer | Generative AI | Agentic Systems | Full-Stack Engineering",
   location: "Chennai, Tamil Nadu, India",
   email: "anushalathaaa7@gmail.com",
-  resumeUrl: "/Anusha B 2026 Resume.pdf",
+  resumeUrl: "/Anusha B Resume.pdf",
   socialLinks: [
     {
       icon: Github,
@@ -93,7 +93,7 @@ export const resumeData: ResumeData = {
     {
       company: "Point Pikkers",
       position: "Full-Stack Developer",
-      duration: "Jan 2026 – Present",
+      duration: "Jan 2026 – May 2026",
       bullets: [
         "Engineered scalable web applications by leveraging React, TypeScript, and Node.js REST services.",
         "Designed, integrated, and optimized backend databases, boosting data retrieval performance.",

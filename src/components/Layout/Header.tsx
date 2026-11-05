@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Menu, Moon, Sun, X } from 'lucide-react';
+import { resumeData } from '../../data/resumeData';
 
 interface HeaderProps {
   theme: 'light' | 'dark';
@@ -11,6 +12,7 @@ const navItems = [
   { id: 'skills', label: 'Expertise' },
   { id: 'projects', label: 'Work' },
   { id: 'systems', label: 'Systems' },
+  { id: 'writing', label: 'Writing' },
   { id: 'experience', label: 'Experience' },
   { id: 'contact', label: 'Contact' },
 ];
@@ -49,7 +51,7 @@ function Header({ theme, toggleTheme }: HeaderProps) {
           >
             {theme === 'dark' ? <Sun size={17} /> : <Moon size={17} />}
           </button>
-          <a className="resume-link" href="/Anusha B 2026 Resume.pdf" download>
+          <a className="resume-link" href={resumeData.resumeUrl} download>
             Resume <span aria-hidden="true">↗</span>
           </a>
           <button
@@ -71,7 +73,7 @@ function Header({ theme, toggleTheme }: HeaderProps) {
               {item.label}
             </a>
           ))}
-          <a href="/Anusha B 2026 Resume.pdf" download onClick={() => setIsMenuOpen(false)}>
+          <a href={resumeData.resumeUrl} download onClick={() => setIsMenuOpen(false)}>
             Download resume
           </a>
         </nav>

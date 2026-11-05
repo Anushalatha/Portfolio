@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { ArrowUpRight, GitFork, Github, Star } from 'lucide-react';
 import Reveal from '../Reveal';
+import { featuredProjects } from '../../data/featuredProjects';
 
 interface GitHubRepository {
   name: string;
@@ -17,8 +18,9 @@ interface RepositoryCache {
   repositories: GitHubRepository[];
 }
 
-const cacheKey = 'portfolio-github-repositories';
+const cacheKey = 'portfolio-github-repositories-v4';
 const cacheDuration = 15 * 60 * 1000;
+const employeeDashboardUrl = 'https://github.com/Anushalatha/Employee_dashboard.git';
 
 function isRepository(value: unknown): value is GitHubRepository {
   if (!value || typeof value !== 'object') return false;
@@ -53,6 +55,25 @@ function readCache(): RepositoryCache | null {
   }
 }
 
+function prioritizeRepositories(repositories: GitHubRepository[]): GitHubRepository[] {
+  const projectOrder = new Map(
+    featuredProjects.map((project, index) => [project.name.toLowerCase(), index]),
+  );
+  projectOrder.set('employee_dashboard', featuredProjects.length);
+
+  return repositories
+    .filter((repository) => {
+      const name = repository.name.toLowerCase();
+      return name !== 'portfolio' && name !== 'anushalatha';
+    })
+    .sort((left, right) => {
+      const leftOrder = projectOrder.get(left.name.toLowerCase()) ?? Number.MAX_SAFE_INTEGER;
+      const rightOrder = projectOrder.get(right.name.toLowerCase()) ?? Number.MAX_SAFE_INTEGER;
+      return leftOrder - rightOrder;
+    })
+    .slice(0, 6);
+}
+
 function GitHubSection() {
   const [repositories, setRepositories] = useState<GitHubRepository[]>([]);
   const [loading, setLoading] = useState(true);
@@ -63,14 +84,14 @@ function GitHubSection() {
     const loadRepositories = async () => {
       const cached = readCache();
       if (cached && Date.now() - cached.savedAt < cacheDuration) {
-        setRepositories(cached.repositories.slice(0, 6));
+        setRepositories(prioritizeRepositories(cached.repositories));
         setLoading(false);
         return;
       }
 
       try {
         const response = await fetch(
-          'https://api.github.com/users/Anushalatha/repos?sort=updated&per_page=6',
+          'https://api.github.com/users/Anushalatha/repos?sort=updated&per_page=100',
           { headers: { Accept: 'application/vnd.github+json' }, signal: controller.signal },
         );
         if (!response.ok) {
@@ -80,7 +101,7 @@ function GitHubSection() {
         if (!Array.isArray(payload) || !payload.every(isRepository)) {
           throw new Error('GitHub returned repository data in an unexpected format.');
         }
-        const nextRepositories = payload as GitHubRepository[];
+        const nextRepositories = prioritizeRepositories(payload as GitHubRepository[]);
         setRepositories(nextRepositories);
         try {
           window.localStorage.setItem(
@@ -94,7 +115,7 @@ function GitHubSection() {
         if (controller.signal.aborted) return;
         const message = error instanceof Error ? error.message : 'Unable to load public repositories.';
         if (cached) {
-          setRepositories(cached.repositories.slice(0, 6));
+          setRepositories(prioritizeRepositories(cached.repositories));
           setErrorMessage(`Live refresh failed. Showing cached repository data instead. ${message}`);
         } else {
           setErrorMessage(message);
@@ -131,21 +152,44 @@ function GitHubSection() {
         )}
         {!loading && repositories.length > 0 && (
           <div className="repository-grid">
-            {repositories.map((repository, index) => (
-              <Reveal key={repository.html_url} className="repository-card">
-                <div className="repository-card-top">
-                  <span className="repository-index">0{index + 1}</span>
-                  {repository.language && <span className="repository-language">{repository.language}</span>}
-                </div>
-                <h3><a href={repository.html_url} target="_blank" rel="noreferrer">{repository.name}<ArrowUpRight size={16} /></a></h3>
-                <p>{repository.description || 'Public repository on GitHub.'}</p>
-                <div className="repository-meta">
-                  <span><Star size={14} /> {repository.stargazers_count}</span>
-                  <span><GitFork size={14} /> {repository.forks_count}</span>
-                  <span>Updated {new Date(repository.updated_at).toLocaleDateString(undefined, { month: 'short', year: 'numeric' })}</span>
-                </div>
-              </Reveal>
-            ))}
+            {repositories.map((repository, index) => {
+              const featuredProject = featuredProjects.find(
+                (project) => project.name.toLowerCase() === repository.name.toLowerCase(),
+              );
+              const primaryStack = featuredProject?.stack.slice(0, 4) ??
+                (repository.language ? [repository.language] : []);
+
+              return (
+                <Reveal key={repository.html_url} className="repository-card">
+                  <div className="repository-card-top">
+                    <span className="repository-index">0{index + 1}</span>
+                    {repository.language && <span className="repository-language">{repository.language}</span>}
+                  </div>
+                  <h3>
+                    <a
+                      href={repository.name.toLowerCase() === 'employee_dashboard'
+                        ? employeeDashboardUrl
+                        : repository.html_url}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {featuredProject?.name ?? repository.name}<ArrowUpRight size={16} />
+                    </a>
+                  </h3>
+                  <p>{repository.description || featuredProject?.summary || 'Public repository on GitHub.'}</p>
+                  {primaryStack.length > 0 && (
+                    <div className="repository-primary-stack" aria-label="Primary technologies">
+                      {primaryStack.map((technology) => <span key={technology}>{technology}</span>)}
+                    </div>
+                  )}
+                  <div className="repository-meta">
+                    <span><Star size={14} /> {repository.stargazers_count}</span>
+                    <span><GitFork size={14} /> {repository.forks_count}</span>
+                    <span>Updated {new Date(repository.updated_at).toLocaleDateString(undefined, { month: 'short', year: 'numeric' })}</span>
+                  </div>
+                </Reveal>
+              );
+            })}
           </div>
         )}
         {!loading && !errorMessage && repositories.length === 0 && (

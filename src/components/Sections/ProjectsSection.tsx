@@ -30,6 +30,7 @@ function ProjectsSection() {
                   </span>
                   <span className="project-title">{project.name}</span>
                   <span className="project-summary">{project.summary}</span>
+                  <span className="project-evidence">{project.evidence}</span>
                   <span className="project-card-bottom">
                     <span className="tag-list">
                       {project.stack.slice(0, 4).map((technology) => (
@@ -49,10 +50,10 @@ function ProjectsSection() {
                   <div className="case-study-architecture">
                     <span className="mini-label">SYSTEM FLOW</span>
                     <div className="case-flow">
-                      {project.architecture.map((step, stepIndex) => (
-                        <span className="case-flow-step" key={step}>
+                    {project.architecture.map((node, stepIndex) => (
+                      <span className="case-flow-step" key={node.label}>
                           {stepIndex > 0 && <span className="case-flow-arrow" aria-hidden="true">→</span>}
-                          <span>{step}</span>
+                        <span>{node.label}</span>
                         </span>
                       ))}
                     </div>
@@ -76,7 +77,11 @@ function ProjectsSection() {
                           <small>{metric.context}</small>
                         </div>
                       ))}
-                      <p className="metric-note">KnowledgeOps benchmark results are specific to the published 30-case dataset, not a general performance guarantee.</p>
+                      {project.name === 'KnowledgeOps' && (
+                        <p className="metric-note">
+                          These results apply to the published benchmark dataset and are not a general performance guarantee.
+                        </p>
+                      )}
                     </div>
                   )}
                   <div className="case-study-footer">
@@ -84,12 +89,17 @@ function ProjectsSection() {
                       {project.stack.map((technology) => <span className="skill-tag" key={technology}>{technology}</span>)}
                     </div>
                     {project.repositoryUrl ? (
-                      <a className="text-link" href={project.repositoryUrl} target="_blank" rel="noreferrer">
-                        <Github size={16} /> View repository <ArrowUpRight size={15} />
-                      </a>
-                    ) : (
-                      <span className="repository-note">{project.repositoryNote}</span>
-                    )}
+                      <div className="project-resource-links">
+                        <a className="text-link" href={project.repositoryUrl} target="_blank" rel="noreferrer">
+                          <Github size={16} /> View repository <ArrowUpRight size={15} />
+                        </a>
+                        {project.liveDemoUrl && (
+                          <a className="text-link" href={project.liveDemoUrl} target="_blank" rel="noreferrer">
+                            Live demo <ArrowUpRight size={15} />
+                          </a>
+                        )}
+                      </div>
+                    ) : null}
                   </div>
                 </div>
               </details>

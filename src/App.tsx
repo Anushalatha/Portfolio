@@ -7,6 +7,7 @@ import ExperienceSection from './components/Sections/ExperienceSection';
 import SkillsSection from './components/Sections/SkillsSection';
 import ProjectsSection from './components/Sections/ProjectsSection';
 import ArchitectureSection from './components/Sections/ArchitectureSection';
+import WritingSection from './components/Sections/WritingSection';
 import GitHubSection from './components/Sections/GitHubSection';
 import TerminalSection from './components/Sections/TerminalSection';
 import ResearchSection from './components/Sections/ResearchSection';
@@ -47,9 +48,10 @@ function App() {
         <HeroSection />
         <AboutSection />
         <SkillsSection />
-        <ExperienceSection />
         <ProjectsSection />
         <ArchitectureSection />
+        <WritingSection />
+        <ExperienceSection />
         <GitHubSection />
         <TerminalSection />
         <ResearchSection />

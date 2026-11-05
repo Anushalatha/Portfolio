@@ -54,7 +54,7 @@ function HeroSection() {
             <a className="button button-primary" href="#projects">
               Explore my work <ArrowDownRight size={17} />
             </a>
-            <a className="button button-secondary" href="/Anusha B 2026 Resume.pdf" download>
+            <a className="button button-secondary" href={resumeData.resumeUrl} download>
               Download resume
             </a>
           </div>
