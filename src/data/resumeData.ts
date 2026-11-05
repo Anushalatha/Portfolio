@@ -16,13 +16,16 @@ export interface Experience {
   position: string;
   duration: string;
   bullets: string[];
+  technologies: string[];
+  isCurrent?: boolean;
 }
 
 export interface Education {
   institution: string;
   degree: string;
-  duration: string;
-  description: string;
+  duration?: string;
+  description?: string;
+  score?: string;
 }
 
 export interface Publication {
@@ -92,59 +95,76 @@ export const resumeData: ResumeData = {
   experiences: [
     {
       company: "Point Pikkers",
-      position: "Full-Stack Developer",
-      duration: "Jan 2026 – May 2026",
+      position: "Full Stack Developer",
+      duration: "January 2026 – May 2026",
       bullets: [
         "Engineered scalable web applications by leveraging React, TypeScript, and Node.js REST services.",
         "Designed, integrated, and optimized backend databases, boosting data retrieval performance.",
         "Created secure API endpoints and authentication protocols, safeguarding application services."
-      ]
+      ],
+      technologies: ["React", "TypeScript", "Node.js"]
     },
     {
       company: "Shooting Stars Foundation",
       position: "IBM Datathon Analyst",
       duration: "Aug 2025 – Oct 2025",
       bullets: [
-        "Coordinated cross-college operations and registrations, structuring structured spreadsheets to log analytical data.",
-        "Processed and engineered cleaning pipelines for large datasets to ensure data integrity and validation accuracy.",
-        "Developed custom technical challenges and evaluations for STEM talent engagement."
-      ]
+        "Coordinated cross-college operations and registrations, maintaining spreadsheets for analytical records.",
+        "Built data-cleaning pipelines for large datasets to support data integrity and validation accuracy.",
+        "Designed technical challenges and evaluations for STEM talent engagement."
+      ],
+      technologies: ["Spreadsheets", "Data processing"]
     },
     {
       company: "OneYes Infotech Solutions",
-      position: "AI / ML Developer Intern",
-      duration: "May 2025 – Aug 2025",
+      position: "AI/ML Developer Intern",
+      duration: "May 2025 – August 2025",
       bullets: [
         "Built predictive machine learning models and deployed them as API services utilizing FastAPI.",
         "Completed rigorous exploratory data analysis, feature engineering, and validation routines.",
         "Integrated computer vision and LLM endpoints into active client-facing frontend infrastructures."
-      ]
+      ],
+      technologies: ["Python", "Machine Learning", "FastAPI"]
     },
     {
       company: "Vulture Lines Pvt Ltd",
       position: "Data Analyst Intern",
-      duration: "Feb – Mar 2025",
+      duration: "February 2025 – March 2025",
       bullets: [
         "Analyzed operational datasets to detect behavior anomalies and built interactive PowerBI dashboards for insights.",
-        "Aggregated heterogenous telemetry records and synthesized visual reports for core business stakeholders."
-      ]
+        "Aggregated heterogeneous telemetry data and synthesized visual reports for business stakeholders."
+      ],
+      technologies: ["Python", "Data Analysis"]
     },
     {
       company: "Prodigy Infotech",
       position: "Machine Learning Intern",
-      duration: "Feb – Mar 2024",
+      duration: "February 2024 – March 2024",
       bullets: [
         "Programmed classification and regression ML models, designing custom normalization pipelines.",
         "Conducted hyperparameter tuning on deep networks (CNNs, LSTMs) to optimize inference metrics."
-      ]
+      ],
+      technologies: ["Python", "Machine Learning"]
     }
   ],
   education: [
     {
       institution: "DMI College of Engineering",
-      degree: "B.Tech in Artificial Intelligence & Data Science",
+      degree: "B.Tech in Artificial Intelligence and Data Science",
       duration: "2022 – 2026",
-      description: "Focus on machine learning, deep learning, big data analysis, and software engineering. Current CGPA: 8.77/10."
+      description: "Academic foundation in artificial intelligence, data science and software engineering.",
+      score: "CGPA 8.82/10"
+    },
+    {
+      institution: "Sunshine Academy Matric Higher Secondary School",
+      degree: "Higher Secondary Education — Class XII",
+      duration: "Passing year: 2022",
+      score: "78%"
+    },
+    {
+      institution: "Sunshine Academy Matric Higher Secondary School",
+      degree: "Secondary Education — Class X",
+      score: "81.9%"
     }
   ],
   skills: [

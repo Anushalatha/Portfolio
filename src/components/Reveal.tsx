@@ -3,9 +3,10 @@ import { useEffect, useRef, useState } from 'react';
 interface RevealProps {
   children: React.ReactNode;
   className?: string;
+  role?: React.AriaRole;
 }
 
-function Reveal({ children, className = '' }: RevealProps) {
+function Reveal({ children, className = '', role }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -39,6 +40,7 @@ function Reveal({ children, className = '' }: RevealProps) {
     <div
       ref={ref}
       className={`reveal ${isVisible ? 'is-visible' : ''} ${className}`}
+      role={role}
     >
       {children}
     </div>

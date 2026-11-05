@@ -4,6 +4,7 @@ import Footer from './components/Layout/Footer';
 import HeroSection from './components/Sections/HeroSection';
 import AboutSection from './components/Sections/AboutSection';
 import ExperienceSection from './components/Sections/ExperienceSection';
+import EducationSection from './components/Sections/EducationSection';
 import SkillsSection from './components/Sections/SkillsSection';
 import ProjectsSection from './components/Sections/ProjectsSection';
 import ArchitectureSection from './components/Sections/ArchitectureSection';
@@ -52,6 +53,7 @@ function App() {
         <ArchitectureSection />
         <WritingSection />
         <ExperienceSection />
+        <EducationSection />
         <GitHubSection />
         <TerminalSection />
         <ResearchSection />
